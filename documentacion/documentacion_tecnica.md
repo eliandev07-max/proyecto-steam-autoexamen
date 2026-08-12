@@ -1,27 +1,25 @@
 # Documentación Técnica
 
-*Fecha: XX de noviembre de 202x*
+*Fecha: 12 de agosto de 2026*
 
-Este documento contiene la documentación técnica para el proyecto STEAM del curso **Laboratorio STEAM+** de la tecnicatura **Redes y Software** del [**nombre del instituto**] de **UTU** año 202x.
+Este documento contiene la documentación técnica para el proyecto STEAM del curso **Laboratorio STEAM+** de la tecnicatura **Redes y Software** del Instituto Superior Brazo Oriental de **UTU** año 2026.
 
-# Proyecto: [Nombre del proyecto]
+# Proyecto: *AUTOEXAMEN+
 
 ## 1. Integrantes
-- [Nombre integrante 1]
-- [Nombre integrante 2]
-- [Nombre integrante 3]
-- [Nombre integrante 4]
-- [Nombre integrante 5]
-
+- Elian Gutierrez
+- Nicolas Rodriguez
+- Richard Rodriguez
+- Agustin Silva
 ## 2. Descripción
-- [Realizar una descripción general del proyecto en dos o tres párrafos]
-- [Formular el problema que se busca resolver y describir la solución]
+- Se trata de un dispositivo basado en micro-bit el cual automatice la corrección de examenes de múltiple opción, brindando una capa intermedia entre el papel y los dispositivos inteligentes (de los cuales se puede copiar facilmente).
+- Buscamos crear un dispositivo que se encuentre entre el mundo digital de los formularios por computadora y el mundo a papel, eliminando el error humano y el tiempo de corrección, agilizando procesos y en el camino ahorrando en costos e impacto ambiental en el uso del papel.   
 
 ## 3. Materiales
-- [Listar los materiales usados por el proyecto]
+-  micro:bit, botones, batería, carcasa, pantalla lcd, cables, protoboard.
 
 ## 4. Diseño Mecánico
-- [Realizar una descripción de como funciona la solución a nivel mecánico]
+- [Realizar una descripción de cómo funciona la solución a nivel mecánico]
 - [¿Cómo se arma la solución? Incluir instrucciones de ensamblaje]
   - [Sugerencia: inspirarse en la forma como https://www.instructables.com detalla el armado de un proyecto]
 - [Incluir fotografías ilustrativas]
