@@ -51,7 +51,7 @@ En ésta clase nos ponemos manos a la obra, comenzamos los diagramas, el armado 
 
 ## Problemas encontrados y soluciones/alternativas propuestas
 
-- <u><wbr>Compatibilidad</u>
+- <u>Compatibilidad</u>
 
 Desde el primer momento encontramos problemas en la compatibilidad entre las coputadoras con ide `Thonny` y `Arduino UNO` en relación al reconocimiento del esp-32 donde ejecutamos el código en micro python.
 
@@ -59,7 +59,13 @@ Desde el primer momento encontramos problemas en la compatibilidad entre las cop
 
 - <u>Solución de compatibilidad</u>
 
+![imagen de lcd andando conjunto al esp-32](../imagenes_proyecto/lcd_funcionando.jpg)
 
+Tuvimos que instalar un driver de compatibilidad entre el esp-32 y las laptops llamado `CP210X UNIVERSAL WINDOWS`.
+
+* [ ] Además de ésto implementamos el diagrama completo del esp32, el lcd 1202 I2C y la botonera:
+
+![diagrama de esp32, botonera y lcd 1202 I2C](../imagenes_proyecto/diagrama_todo.jpg)
 
 - [Próximos pasos]
 - [Imágenes o videos ilustrativos del avance]
