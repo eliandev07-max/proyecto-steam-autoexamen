@@ -16,7 +16,7 @@ Este documento contiene la documentación técnica para el proyecto STEAM del cu
 - Buscamos crear un dispositivo que se encuentre entre el mundo digital de los formularios por computadora y el mundo a papel, eliminando el error humano y el tiempo de corrección, agilizando procesos y en el camino ahorrando en costos e impacto ambiental en el uso del papel.   
 
 ## 3. Materiales
--  micro:bit, botones, batería, carcasa, pantalla lcd, cables, protoboard.
+-    `ESP-32 DEV KIT 1.0`, `botones`, `batería`, `carcasa`, `pantalla lcd 1202`, `cables`, `protoboard`.
 
 ## 4. Diseño Mecánico
 - [Realizar una descripción de cómo funciona la solución a nivel mecánico]
