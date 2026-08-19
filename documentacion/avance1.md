@@ -18,6 +18,12 @@ Informe de Avance 1: Agosto 2026
   datos por segundo que tiene la antena de radio de micro:bit, lo cual retrasaría y
   plantearía una solución más compleja fuera del alcance de proyecto. 
   ```
+  - Soluciónes alternativas
+    ```text
+    barajamos las pataformas de arduino uno y esp 32, en primer lugar tomamos arduino uno por su adaptabilidad y ecosistema existente el cual nos proporciona un gran soporte en cuanto a librerias y tutoriales.
+
+    De cualquier forma deberíamos invertir en un modulo extra que nos sirva como antena entre cada nodo, de ésta forma 
+    ```
 - [Próximos pasos]
 - [Imágenes o videos ilustrativos del avance]
 
