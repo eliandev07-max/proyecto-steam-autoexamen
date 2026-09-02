@@ -1,44 +1,11 @@
-Informe de Avance 1: Agosto 2026
-
-<html>
-<style>
-.rojo{
-  background-color:red;
-}
-</style>
-<body>
-
-</html>
-
 ## Aclaraciónes del desarrollo documentativo del proyecto
 
-<table border='1' style='text-align:center;'>
-<thead style='background-color:rgba(255,0,0,0.2)'>
-<td><u><b>Miembro</b></u></td>
-<td><u><b>Rol</b></u></td>
-<td><u><b>Descripción</b></u></td>
-</thead>
-<tr>
-<td>Elian Gutierrez</td>
-<td>Documenter & investigador</td>
-<td>Encargado de la documentación e investigación referente al proyecto</td>
-</tr>
-<tr>
-<td>Agustin Silva</td>
-<td>Investigador & Tester</td>
-<td>Encargado de la investigación referente al proyecto y el testing de los diagramas y código</td>
-</tr>
-<tr>
-<td>Nicolas Rodriguez</td>
-<td>Orquestador & programador</td>
-<td>Encargado de la orquesta de procesos y programación según los requerimientos funcionales</td>
-</tr>
-<tr>
-<td>Richard Rodriguez</td>
-<td>Electrónica & Soldadura</td>
-<td>Encargado de la orquesta de procesos de electrónica aplicada y componentes</td>
-</tr>
-</table>
+| **Miembro** | **Rol** | **Descripción** |
+|:---:|:---:|:---:|
+| Elian Gutierrez | Documenter & investigador | Encargado de la documentación e investigación referente al proyecto |
+| Agustin Silva | Investigador & Tester | Encargado de la investigación referente al proyecto y el testing de los diagramas y código |
+| Nicolas Rodriguez | Orquestador & programador | Encargado de la orquesta de procesos y programación según los requerimientos funcionales |
+| Richard Rodriguez | Electrónica & Soldadura | Encargado de la orquesta de procesos de electrónica aplicada y componentes |
 
 ## 12/8/2026
 
@@ -76,8 +43,7 @@ Utilizamos esp-32 con el protocolo esp-now para conectar los dispositivos nodos 
 
 ### Próximos pasos
 
-- Integrar diagramas con la placa esp-32 física junto a una pantalla lcd 1602 I2C.
-- [Imágenes o videos ilustrativos del avance]
+Nos vamos a poner manos a la obra plazmando el diagrama en la vida real.
 
 ## 19/8/2026
 
@@ -87,17 +53,17 @@ En ésta clase nos ponemos manos a la obra, comenzamos los diagramas, el armado 
 
 - Primer testeo del lcd 1602 alimentada con el esp-32
 - Primeros diagramas de conección del lcd 1602 con el esp-32
-- Versión de prueba del código en c++
+- Versión de [prueba del código en c++](../codigo%20de%20prueba/ejemplo.c++)
 
 ## Problemas encontrados y soluciones/alternativas propuestas
 
-- <u>Compatibilidad</u>
+### Compatibilidad
 
 Desde el primer momento encontramos problemas en la compatibilidad entre las coputadoras con ide `Thonny` y `Arduino UNO` en relación al reconocimiento del esp-32 donde ejecutamos el código en micro python.
 
 ![testeando_esp32 con disferentes IDEs](../imagenes_proyecto/testeando_esp32.jpg)
 
-- <u>Solución de compatibilidad</u>
+### Solución de compatibilidad
 
 ![imagen de lcd andando conjunto al esp-32](../imagenes_proyecto/lcd_funcionando.jpg)
 
@@ -116,33 +82,49 @@ Tuvimos que instalar un driver de compatibilidad entre el esp-32 y las laptops l
 ## 26/8/2026
 
 - Hoy testeamos el codigo, resolvimos problemas de conecciónes, planteamos ññ
-- [Incluir:]
-  - [Tareas completadas]
 
 ### Problemas encontrados y soluciones/alternativas propuestas
 
-  <u>Problema</u>
+#### Problema ####
 
 - <u>1.0</u> El esp32 no entra en una protoboard completa, es necesario para tener disponible todos los pines.
 - <u>2.0</u> El lcd 1602 no refleja los cambios del código del esp32.
   ![esp32 con el lcd ](../imagenes_proyecto/esp_testeandose.jpg)
 
-  ### Soluciónes alternativas
+### Soluciónes alternativas
+
 - <u>1.0</u> pusimos el esp32 en la parte que necesitamos contectar más pines y del otro lado conectamos con cables hembra:
   ![esp32 que no funciona](../imagenes_proyecto/esp_no_entra.jpg)
   <i>esp32 conectado para funcionar</i>
+
 - <u>2.0</u> Fallo de la conección del pin `SCL` del lcd con el pin `d22` del esp32, el problema estaba en un falso contacto de un cable flojo que hacía la conección. Lo solucionamos conecandolo directamente al esp32 cambiandole el cable en mal estado por uno en buen estado.
-    ![funcionando](../imagenes_proyecto/funcionnando_2.jpg) 
+  ![funcionando](../imagenes_proyecto/funcionnando_2.jpg)
 
 ### Próximos pasos
 
 Sincronizar esp32 con pc laptop para envío de json y html.
 
-  - [Imágenes o videos ilustrativos del avance]
+## 02/8/2026
 
-## [x]/8/202x
+### Problemas encontrados
 
-- [Realizar una descripción de los avances en el proyecto en la fecha en uno o dos párrafos]
+***1.0*** Problemas en la conección de redes.
+
+Surgen problemas en la conección entre el esp32 y el dispositio que va a recepcionar el resultado
+
+
+### Soluciones alternativas
+
+***1.0*** Enlace directo desde el esp32 al dispositivo
+
+Enlazamos directamente el esp32 mediante un punto hostpot al dispositivo que va a recibir las respuestas de los examenes, de ésta forma evitamos las restricciónes del wifi ceibal, el cual bloquea muchos puertos y protocoles en la red.
+
+
+### Avances 
+
+Nuevo programa monolito que gestiona (lcd 1602 + gestion del esp32 + de la recepción de las respuestas del examen) en [código completo v1.0 c++](../codigo%20de%20prueba/CodigoCompleto-Conexion.c++).
+
+
 - [Incluir:]
   - [Tareas completadas]
   - [Problemas encontrados y soluciones/alternativas propuestas]
