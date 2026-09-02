@@ -1,0 +1,386 @@
+#include <Wire.h>
+#include <LiquidCrystal_I2C.h>
+#include <WiFi.h>
+#include <WebServer.h>
+#include <DNSServer.h>
+
+LiquidCrystal_I2C lcd(0x27, 16, 2);
+
+// --- Config Access Point ---
+const char* ssid = "Autoexamen";
+const char* password = "examen123";
+WebServer server(80);
+DNSServer dnsServer;
+
+// Mapeo de pines a GND
+#define BTN_RIGHT  13
+#define BTN_LEFT   26
+#define BTN_UP     25
+#define BTN_DOWN   27
+#define BTN_SELECT 32
+
+const int totalPreguntas = 30;
+int respuestaCorrecta[totalPreguntas];
+int respuestaAlumno[totalPreguntas]; 
+
+int preguntaActual = 0;
+bool pantallaConfirmacion = false;
+bool examenTerminado = false;
+bool examenIniciado = false; 
+
+unsigned long ultimoBoton = 0;
+const int debounceDelay = 200;
+
+char letras[4] = {'A', 'B', 'C', 'D'};
+
+// ================= DECLARACIÓN DE PROTOTIPOS =================
+void mostrarPregunta();
+void mostrarConfirmacion();
+void manejarConfirmacion();
+void moverOpcion(int dir);
+void moverPregunta(int dir);
+void finalizarExamen();
+void mostrarEsperando();
+
+// ================= VISTAS Y FUNCIONES LCD =================
+
+void mostrarEsperando() {
+  lcd.clear();
+  lcd.setCursor(0, 0);
+  lcd.print("Red: ");
+  lcd.print(ssid);
+  lcd.setCursor(0, 1);
+  lcd.print(WiFi.softAPIP());
+}
+
+void mostrarPregunta() {
+  lcd.clear();
+  lcd.setCursor(0, 0);
+  lcd.print("Pregunta: ");
+  lcd.print(preguntaActual + 1);
+  lcd.print("/");
+  lcd.print(totalPreguntas);
+
+  lcd.setCursor(0, 1);
+  int sel = respuestaAlumno[preguntaActual];
+
+  for (int i = 0; i < 4; i++) {
+    if (i == sel) {
+      lcd.print('[');
+      lcd.print(letras[i]);
+      lcd.print(']');
+    } else {
+      lcd.print(' ');
+      lcd.print(letras[i]);
+      lcd.print(' ');
+    }
+  }
+}
+
+void mostrarConfirmacion() {
+  int sinResponder = 0;
+  for (int i = 0; i < totalPreguntas; i++) {
+    if (respuestaAlumno[i] == -1) sinResponder++;
+  }
+
+  lcd.clear();
+  lcd.setCursor(0, 0);
+  if (sinResponder > 0) {
+    lcd.print("Faltan ");
+    lcd.print(sinResponder);
+    lcd.print(" sin resp");
+  } else {
+    lcd.print("Confirmar envio?");
+  }
+
+  lcd.setCursor(0, 1);
+  lcd.print("SEL=Si  IZQ=No");
+}
+
+void moverOpcion(int dir) {
+  int actual = respuestaAlumno[preguntaActual];
+
+  if (actual == -1) {
+    actual = (dir == 1) ? 0 : 3;
+  } else {
+    actual = (actual + dir + 4) % 4;
+  }
+
+  respuestaAlumno[preguntaActual] = actual;
+  mostrarPregunta();
+  ultimoBoton = millis();
+}
+
+void moverPregunta(int dir) {
+  preguntaActual += dir;
+  if (preguntaActual < 0) preguntaActual = 0;
+  if (preguntaActual >= totalPreguntas) preguntaActual = totalPreguntas - 1;
+  mostrarPregunta();
+  ultimoBoton = millis();
+}
+
+void finalizarExamen() {
+  examenTerminado = true;
+  int puntaje = 0;
+  for (int i = 0; i < totalPreguntas; i++) {
+    if (respuestaAlumno[i] != -1 && respuestaAlumno[i] == respuestaCorrecta[i]) {
+      puntaje++;
+    }
+  }
+
+  lcd.clear();
+  lcd.setCursor(0, 0);
+  lcd.print("Examen terminado");
+  lcd.setCursor(0, 1);
+  lcd.print("Puntaje: ");
+  lcd.print(puntaje);
+  lcd.print("/");
+  lcd.print(totalPreguntas);
+}
+
+void manejarConfirmacion() {
+  if (digitalRead(BTN_SELECT) == LOW) {
+    finalizarExamen();
+    ultimoBoton = millis();
+  }
+  else if (digitalRead(BTN_LEFT) == LOW) {
+    pantallaConfirmacion = false;
+    mostrarPregunta();
+    ultimoBoton = millis();
+  }
+}
+
+// ================= WEB MEJORADA =================
+
+String paginaPrincipal() {
+  String html = R"rawliteral(
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Autoexamen - Panel del Profesor</title>
+  <style>
+    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; max-width: 600px; margin: 20px auto; padding: 0 15px; background-color: #f4f7f6; color: #333; }
+    h1 { font-size: 22px; text-align: center; color: #2c3e50; }
+    .card { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); margin-bottom: 20px; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 10px; margin-top: 15px; }
+    .item { background: #fafafa; border: 1px solid #ddd; padding: 8px; border-radius: 5px; text-align: center; }
+    .item span { font-weight: bold; display: block; margin-bottom: 5px; font-size: 14px; }
+    .options { display: flex; justify-content: space-around; }
+    .options label { font-size: 13px; cursor: pointer; }
+    button { padding: 12px 20px; margin-top: 15px; cursor: pointer; font-size: 16px; border-radius: 5px; font-weight: bold; border: none; width: 100%; }
+    .guardar { background: #3498db; color: white; }
+    .iniciar { background: #27ae60; color: white; }
+    .status-box { font-size: 18px; text-align: center; font-weight: bold; padding: 10px; border-radius: 5px; }
+    .pendiente { background: #ffeaa7; color: #d35400; }
+    .finalizado { background: #55efc4; color: #00897b; }
+    .respuesta-tag { display: inline-block; padding: 2px 6px; border-radius: 3px; font-size: 12px; margin: 2px; }
+    .correcta { background: #2ecc71; color: white; }
+    .incorrecta { background: #e74c3c; color: white; }
+  </style>
+</head>
+<body>
+  <h1>Panel de Control del Examen</h1>
+  
+  <div class="card">
+    <h2>1. Clave de Respuestas Correctas</h2>
+    <form action="/guardar" method="POST">
+      <div class="grid">
+)rawliteral";
+
+  for (int i = 0; i < totalPreguntas; i++) {
+    html += "<div class='item'><span>P" + String(i + 1) + "</span><div class='options'>";
+    for (int j = 0; j < 4; j++) {
+      html += "<label><input type='radio' name='resp" + String(i) + "' value='" + String(j) + "'";
+      if (respuestaCorrecta[i] == j) html += " checked";
+      html += ">" + String(letras[j]) + "</label>";
+    }
+    html += "</div></div>";
+  }
+
+  html += R"rawliteral(
+      </div>
+      <button type="submit" class="guardar">Guardar Solucionario</button>
+    </form>
+  </div>
+
+  <div class="card">
+    <h2>2. Control del Examen</h2>
+    <form action="/iniciar" method="POST">
+      <button type="submit" class="iniciar">Habilitar / Reiniciar Examen</button>
+    </form>
+  </div>
+
+  <div class="card">
+    <h2>3. Estado / Resultado del Alumno</h2>
+    <div id="estado-contenedor" class="status-box pendiente">Esperando inicio...</div>
+    <div id="desglose" style="margin-top: 15px;"></div>
+  </div>
+
+  <script>
+    function consultarEstado() {
+      fetch('/api_estado')
+        .then(response => response.json())
+        .then(data => {
+          const contenedor = document.getElementById('estado-contenedor');
+          const desglose = document.getElementById('desglose');
+          
+          if (!data.iniciado) {
+            contenedor.className = "status-box pendiente";
+            contenedor.innerHTML = "Examen no iniciado. Cargue el solucionario y presione Iniciar.";
+            desglose.innerHTML = "";
+          } else if (!data.terminado) {
+            contenedor.className = "status-box pendiente";
+            contenedor.innerHTML = "El alumno está resolviendo el examen en la protoboard...";
+            desglose.innerHTML = "";
+          } else {
+            contenedor.className = "status-box finalizado";
+            contenedor.innerHTML = "¡EXAMEN RECIBIDO!<br>Puntaje: " + data.puntaje + " / " + data.total;
+            
+            let htmlDesglose = "<h3>Desglose de Respuestas:</h3><div style='display:grid; grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)); gap:5px;'>";
+            data.respuestas.forEach((resp, idx) => {
+              let clase = (resp.alumno === resp.correcta) ? "correcta" : "incorrecta";
+              htmlDesglose += `<div style='border:1px solid #ccc; padding:4px; text-align:center; border-radius:4px;'>
+                <b>P${idx + 1}:</b> <span class='respuesta-tag ${clase}'>${resp.alumno}</span>
+              </div>`;
+            });
+            htmlDesglose += "</div>";
+            desglose.innerHTML = htmlDesglose;
+          }
+        });
+    }
+
+    setInterval(consultarEstado, 2000);
+    consultarEstado();
+  </script>
+</body>
+</html>
+)rawliteral";
+
+  return html;
+}
+
+void handleRoot() {
+  server.send(200, "text/html", paginaPrincipal());
+}
+
+void handleGuardar() {
+  for (int i = 0; i < totalPreguntas; i++) {
+    String campo = "resp" + String(i);
+    if (server.hasArg(campo)) {
+      respuestaCorrecta[i] = server.arg(campo).toInt();
+    }
+  }
+  server.sendHeader("Location", "/");
+  server.send(303);
+}
+
+void handleIniciar() {
+  for (int i = 0; i < totalPreguntas; i++) {
+    respuestaAlumno[i] = -1;
+  }
+  examenIniciado = true;
+  examenTerminado = false;
+  pantallaConfirmacion = false;
+  preguntaActual = 0;
+  
+  mostrarPregunta(); 
+  server.sendHeader("Location", "/");
+  server.send(303);
+}
+
+void handleApiEstado() {
+  String json = "{";
+  json += "\"iniciado\":" + String(examenIniciado ? "true" : "false") + ",";
+  json += "\"terminado\":" + String(examenTerminado ? "true" : "false") + ",";
+  
+  int puntaje = 0;
+  String respuestasArr = "[";
+  for (int i = 0; i < totalPreguntas; i++) {
+    int resp = respuestaAlumno[i];
+    if (resp != -1 && resp == respuestaCorrecta[i]) puntaje++;
+    
+    respuestasArr += "{\"alumno\":\"";
+    respuestasArr += (resp == -1) ? "-" : String(letras[resp]);
+    respuestasArr += "\",\"correcta\":\"" + String(letras[respuestaCorrecta[i]]) + "\"}";
+    if (i < totalPreguntas - 1) respuestasArr += ",";
+  }
+  respuestasArr += "]";
+  
+  json += "\"puntaje\":" + String(puntaje) + ",";
+  json += "\"total\":" + String(totalPreguntas) + ",";
+  json += "\"respuestas\":" + respuestasArr;
+  json += "}";
+
+  server.send(200, "application/json", json);
+}
+
+// ================= SETUP & LOOP =================
+
+void setup() {
+  Serial.begin(115200);
+
+  Wire.begin(21, 22);
+  delay(100);
+  lcd.init();
+  lcd.backlight();
+
+  pinMode(BTN_RIGHT, INPUT_PULLUP);
+  pinMode(BTN_LEFT, INPUT_PULLUP);
+  pinMode(BTN_UP, INPUT_PULLUP);
+  pinMode(BTN_DOWN, INPUT_PULLUP);
+  pinMode(BTN_SELECT, INPUT_PULLUP);
+
+  for (int i = 0; i < totalPreguntas; i++) {
+    respuestaAlumno[i] = -1;   
+    respuestaCorrecta[i] = 0;  
+  }
+
+  WiFi.softAP(ssid, password);
+  dnsServer.start(53, "*", WiFi.softAPIP());
+
+  server.on("/", handleRoot);
+  server.on("/guardar", HTTP_POST, handleGuardar);
+  server.on("/iniciar", HTTP_POST, handleIniciar);
+  server.on("/api_estado", HTTP_GET, handleApiEstado);
+  
+  server.onNotFound([]() {
+    server.sendHeader("Location", "http://192.168.4.1/");
+    server.send(302, "text/plain", "");
+  });
+
+  server.begin();
+  mostrarEsperando();
+}
+
+void loop() {
+  dnsServer.processNextRequest();
+  server.handleClient(); 
+
+  if (!examenIniciado || examenTerminado) return;
+  if (millis() - ultimoBoton < debounceDelay) return;
+
+  if (pantallaConfirmacion) {
+    manejarConfirmacion();
+    return;
+  }
+
+  if (digitalRead(BTN_RIGHT) == LOW) {
+    moverOpcion(1);
+  }
+  else if (digitalRead(BTN_LEFT) == LOW) {
+    moverOpcion(-1);
+  }
+  else if (digitalRead(BTN_UP) == LOW) {
+    moverPregunta(-1);
+  }
+  else if (digitalRead(BTN_DOWN) == LOW) {
+    moverPregunta(1);
+  }
+  else if (digitalRead(BTN_SELECT) == LOW) {
+    pantallaConfirmacion = true;
+    mostrarConfirmacion();
+    ultimoBoton = millis();
+  }
+}
