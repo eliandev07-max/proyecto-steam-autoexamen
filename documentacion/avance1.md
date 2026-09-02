@@ -1,16 +1,16 @@
 Informe de Avance 1: Agosto 2026
 
-<html>
-<style>
-.rojo{
-  background-color:red;
-}
-</style>
-<body>
-
-</html>
-
 ## Aclaraciónes del desarrollo documentativo del proyecto
+
+En markdown se pueden hacer tablas. Usar markdown siempre que sea posible, y solo HTML cuando no quede otra opción.
+
+
+| Miembro    | Rol     | Descripción |
+| ---------- | ------- | ----------- |
+| Elian      | bla     | el rol es bla la vla |
+| Agustin    | otro    | este otro rol tuki |
+
+
 
 <table border='1' style='text-align:center;'>
 <thead style='background-color:rgba(255,0,0,0.2)'>
@@ -64,7 +64,7 @@ En ésta clase realizamos un estudio de mercado conjunto con todos los integrant
 
 #### Soluciónes alternativas
 
-barajamos las pataformas de arduino uno y esp 32, en primer lugar tomamos arduino uno por su adaptabilidad y ecosistema existente el cual nos proporciona un gran soporte en cuanto a librerias y tutoriales.
+Barajamos las pataformas de arduino uno y esp 32, en primer lugar tomamos arduino uno por su adaptabilidad y ecosistema existente el cual nos proporciona un gran soporte en cuanto a librerias y tutoriales.
 
 De cualquier forma deberíamos invertir en un modulo extra que nos sirva como antena entre cada nodo y el gateway, de ésta forma se sigue compejizando por incorporar modulos extras.
 
@@ -77,7 +77,6 @@ Utilizamos esp-32 con el protocolo esp-now para conectar los dispositivos nodos 
 ### Próximos pasos
 
 - Integrar diagramas con la placa esp-32 física junto a una pantalla lcd 1602 I2C.
-- [Imágenes o videos ilustrativos del avance]
 
 ## 19/8/2026
 
@@ -87,17 +86,17 @@ En ésta clase nos ponemos manos a la obra, comenzamos los diagramas, el armado 
 
 - Primer testeo del lcd 1602 alimentada con el esp-32
 - Primeros diagramas de conección del lcd 1602 con el esp-32
-- Versión de prueba del código en c++
+- Versión de [prueba del código en c++](codigo_de_prueba/ejemplo.c++)
 
 ## Problemas encontrados y soluciones/alternativas propuestas
 
-- <u>Compatibilidad</u>
+### Compatibilidad
 
 Desde el primer momento encontramos problemas en la compatibilidad entre las coputadoras con ide `Thonny` y `Arduino UNO` en relación al reconocimiento del esp-32 donde ejecutamos el código en micro python.
 
 ![testeando_esp32 con disferentes IDEs](../imagenes_proyecto/testeando_esp32.jpg)
 
-- <u>Solución de compatibilidad</u>
+### Solución de compatibilidad
 
 ![imagen de lcd andando conjunto al esp-32](../imagenes_proyecto/lcd_funcionando.jpg)
 
@@ -115,40 +114,23 @@ Tuvimos que instalar un driver de compatibilidad entre el esp-32 y las laptops l
 
 ## 26/8/2026
 
-- Hoy testeamos el codigo, resolvimos problemas de conecciónes, planteamos ññ
-- [Incluir:]
-  - [Tareas completadas]
+- Hoy testeamos el codigo, resolvimos problemas de conecciónes, planteamos
 
 ### Problemas encontrados y soluciones/alternativas propuestas
 
-  <u>Problema</u>
+#### Problema ####
 
-- <u>1.0</u> El esp32 no entra en una protoboard completa, es necesario para tener disponible todos los pines.
-- <u>2.0</u> El lcd 1602 no refleja los cambios del código del esp32.
+- **1.0** El esp32 no entra en una protoboard completa, es necesario para tener disponible todos los pines.
+- **2.0** El lcd 1602 no refleja los cambios del código del esp32.
   ![esp32 con el lcd ](../imagenes_proyecto/esp_testeandose.jpg)
 
   ### Soluciónes alternativas
-- <u>1.0</u> pusimos el esp32 en la parte que necesitamos contectar más pines y del otro lado conectamos con cables hembra:
+- **1.0** pusimos el esp32 en la parte que necesitamos contectar más pines y del otro lado conectamos con cables hembra:
   ![esp32 que no funciona](../imagenes_proyecto/esp_no_entra.jpg)
-  <i>esp32 conectado para funcionar</i>
-- <u>2.0</u> Fallo de la conección del pin `SCL` del lcd con el pin `d22` del esp32, el problema estaba en un falso contacto de un cable flojo que hacía la conección. Lo solucionamos conecandolo directamente al esp32 cambiandole el cable en mal estado por uno en buen estado.
+  *esp32 conectado para funcionar*
+- **2.0** Fallo de la conección del pin `SCL` del lcd con el pin `d22` del esp32, el problema estaba en un falso contacto de un cable flojo que hacía la conección. Lo solucionamos conecandolo directamente al esp32 cambiandole el cable en mal estado por uno en buen estado.
     ![funcionando](../imagenes_proyecto/funcionnando_2.jpg) 
 
 ### Próximos pasos
 
 Sincronizar esp32 con pc laptop para envío de json y html.
-
-  - [Imágenes o videos ilustrativos del avance]
-
-## [x]/8/202x
-
-- [Realizar una descripción de los avances en el proyecto en la fecha en uno o dos párrafos]
-- [Incluir:]
-  - [Tareas completadas]
-  - [Problemas encontrados y soluciones/alternativas propuestas]
-  - [Próximos pasos]
-  - [Imágenes o videos ilustrativos del avance]
-
-## Nota
-
-En este enlace encontrarás un [ejemplo como debe completarse el informe de avance](avance_ejemplo.md).
