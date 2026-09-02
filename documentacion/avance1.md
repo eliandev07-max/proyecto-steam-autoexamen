@@ -124,9 +124,21 @@ Enlazamos directamente el esp32 mediante un punto hostpot al dispositivo que va 
 
 Nuevo programa monolito que gestiona (lcd 1602 + gestion del esp32 + de la recepción de las respuestas del examen) en [código completo v1.0 c++](../codigo%20de%20prueba/CodigoCompleto-Conexion.c++).
 
+### Tareas completadas
+  
+  Implementamos una vista tipo página web para el control del profesor:
 
-- [Incluir:]
-  - [Tareas completadas]
+[Agregar nuevo alumno](../imagenes_proyecto/image%20(1).png)
+  *** (Agregar nuevo alumno) ***
+[Configuracion de la materia y examen](../imagenes_proyecto/image%20(2).png)
+  *** (Configuración de la materia y examen) ***
+[Control Examen](../imagenes_proyecto/image%20(3).png)
+  *** (Establece las respuestas correctas y espera el resultado del examen) ***
+[Agregar nuevo alumno](../imagenes_proyecto/image.png)
+  *** (Ver las notas globales de cada alumno en el examen) ***
+
+  
+  
   - [Problemas encontrados y soluciones/alternativas propuestas]
   - [Próximos pasos]
   - [Imágenes o videos ilustrativos del avance]
