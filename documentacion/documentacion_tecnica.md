@@ -1,6 +1,5 @@
 # Documentación Técnica
 
-
 Este documento contiene la documentación técnica para el proyecto STEAM del curso **Laboratorio STEAM+** de la tecnicatura **Redes y Software** del Instituto Superior Brazo Oriental de **UTU** año 2026.
 
 # Proyecto: \*AUTOEXAMEN
@@ -43,69 +42,49 @@ Este documento contiene la documentación técnica para el proyecto STEAM del cu
 
 ## 7. Referencias y recursos
 
-[Listar referencias, fuentes, recursos, etc usados durante el desarrollo del proyecto]
+### 7.1 Diagrama fase de desarrollo esp32
 
-## 8. Otros
+Diagrama de esp en la protoboard con la botonera (diagrama fiel a la realidad)
+![diagrama esp32 con botones](../imagenes_proyecto/diagrama.png)
+
+
+## 8. Especificaciónes de la esp32
+
+| Método de Alimentación / Pin  | Tensión de Entrada Permitida      | ¿Tiene Protección? / Notas                                                |
+| ----------------------------- | --------------------------------- | ------------------------------------------------------------------------- |
+| Puerto USB (Micro/Tipo C)     | 5V                                | Sí. Pasa por un regulador interno que la reduce a 3.3V.                   |
+| Pin VIN (o 5V)                | 4.8V a 12V (Recomendado: 5V a 9V) | Sí. El regulador a bordo tolera picos, pero voltajes altos generan calor. |
+| Pin 3.3V                      | 3.0V a 3.6V (Exacto: 3.3V)        | No. Va directo al chip; más de 3.6V quema el ESP32.                       |
+| Pines GPIO (Entradas/Salidas) | 0V a 3.3V (Máximo absoluto: 3.6V) | No toleran 5V. Usar sensores de 5V requiere divisores de tensión.         |
 
 [Incluir cualquier otra información que consideren relevante para el proyecto]
 
 ---
 
-## Nota
-
-Diagrama de la conexiónes importantes
+## Diagrama de la conexiónes importantes
 
 **pines de 1602 I2C con esp32:**
 
-<table border='1' style='text-align:center;'>
-  <thead style='background-color:rgba(255,0,0,0.2)'>
-  <td><u><b>1602 I2C</b></u></td>
-  <td><u><b>esp32</b></u></td>
-  </thead>
-  <tbody>
-  <tr>
-  <td>GND</td>
-  <td>GND</td>
-  </tr>
-  <tr><td>VCC</td><td>bin (5v)</td></tr>
-  <tr>
-  <td>SDA</td><td>d21</td></tr>
-  <tr><td>SCL</td><td>d22</td></tr>
-
-gnd - gnd
-vcc - 5v
-sda - d21
-scl - d22
+| 1602 I2C |  esp32   |
+| :------: | :------: |
+|   GND    |   GND    |
+|   VCC    | bin (5v) |
+|   SDA    |   d21    |
+|   SCL    |   d22    |
 
 **pines de la botonera al esp32**
 
-<table border='1' style='text-align:center;'>
-  <thead style='background-color:rgba(255,0,0,0.2)'>
-  <td><u><b>botonera</b></u></td>
-  <td><u><b>esp32</b></u></td>
-  </thead>
-  <tbody>
-  <tr>
-  <td>SUBIR</td>
-  <td>d25</td>
-  </tr>
-  <tr>
-  <td>BAJAR</td>
-  <td>d27</td>
-  </tr>
-  <tr>
-  <td>CONFIRMAR</td>
-  <td>d32</td>
-  </tr>
-  <tr>
-  <td>IZQUIERDA</td>
-  <td>d26</td>
-  </tr>
-  <tr>
-  <td>DERECHA</td>
-  <td>d13</td>
-  </tr>
-  </tbody>
-</table>
+| botonera  | esp32 |
+| :-------: | :---: |
+|   SUBIR   |  d25  |
+|   BAJAR   |  d27  |
+| CONFIRMAR |  d32  |
+| IZQUIERDA |  d26  |
+|  DERECHA  |  d13  |
 
 ---
+
+### Usuario de prueba del lógin del profesor
+
+usuario de prueba: **ruso**
+contraseña: **ruso2026**
