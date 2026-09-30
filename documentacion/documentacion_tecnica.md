@@ -47,15 +47,14 @@ Este documento contiene la documentación técnica para el proyecto STEAM del cu
 Diagrama de esp en la protoboard con la botonera (diagrama fiel a la realidad)
 ![diagrama esp32 con botones](../imagenes_proyecto/diagrama.png)
 
-
 ## 8. Especificaciónes de la esp32
 
-| Método de Alimentación / Pin  | Tensión de Entrada Permitida      | ¿Tiene Protección? / Notas                                                |
-| ----------------------------- | --------------------------------- | ------------------------------------------------------------------------- |
-| Puerto USB (Micro/Tipo C)     | 5V                                | Sí. Pasa por un regulador interno que la reduce a 3.3V.                   |
-| Pin VIN (o 5V)                | 4.8V a 12V (Recomendado: 5V a 9V) | Sí. El regulador a bordo tolera picos, pero voltajes altos generan calor. |
-| Pin 3.3V                      | 3.0V a 3.6V (Exacto: 3.3V)        | No. Va directo al chip; más de 3.6V quema el ESP32.                       |
-| Pines GPIO (Entradas/Salidas) | 0V a 3.3V (Máximo absoluto: 3.6V) | No toleran 5V. Usar sensores de 5V requiere divisores de tensión.         |
+| Método de Alimentación / Pin | Tensión de Entrada Permitida      | ¿Tiene Protección? / Notas                                               |
+| ------------------------------ | ---------------------------------- | -------------------------------------------------------------------------- |
+| Puerto USB (Micro/Tipo C)      | 5V                                 | Sí. Pasa por un regulador interno que la reduce a 3.3V.                   |
+| Pin VIN (o 5V)                 | 4.8V a 12V (Recomendado: 5V a 9V)  | Sí. El regulador a bordo tolera picos, pero voltajes altos generan calor. |
+| Pin 3.3V                       | 3.0V a 3.6V (Exacto: 3.3V)         | No. Va directo al chip; más de 3.6V quema el ESP32.                       |
+| Pines GPIO (Entradas/Salidas)  | 0V a 3.3V (Máximo absoluto: 3.6V) | No toleran 5V. Usar sensores de 5V requiere divisores de tensión.         |
 
 [Incluir cualquier otra información que consideren relevante para el proyecto]
 
@@ -65,16 +64,16 @@ Diagrama de esp en la protoboard con la botonera (diagrama fiel a la realidad)
 
 **pines de 1602 I2C con esp32:**
 
-| 1602 I2C |  esp32   |
-| :------: | :------: |
-|   GND    |   GND    |
-|   VCC    | bin (5v) |
-|   SDA    |   d21    |
-|   SCL    |   d22    |
+| 1602 I2C | esp32 |
+| :------: | :---: |
+|   GND   |  GND  |
+|   VCC   |  VN  |
+|   SDA   |  d21  |
+|   SCL   |  d22  |
 
 **pines de la botonera al esp32**
 
-| botonera  | esp32 |
+| botonera | esp32 |
 | :-------: | :---: |
 |   SUBIR   |  d25  |
 |   BAJAR   |  d27  |
