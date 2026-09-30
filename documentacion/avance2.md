@@ -1,4 +1,4 @@
-# Informe de Avance 2: Septiembre 202x
+# Informe de Avance 2: Septiembre 2026
 
 ## 9/9/2026
 
@@ -47,6 +47,8 @@ Hoy implementamos la nueva botonera con su case y los botones andando:
 
 Ya mandamos a imprimir el case oficial del proyecto
 
+https://github.com/user-attachments/assets/38a6b14d-ed94-43bb-9fa4-cd2f9a2c67c9
+
 ### Imagenes relevantes
 
 ![Parte delantera de la botonera](../imagenes_proyecto/adelante_botonera.jpg)
@@ -55,6 +57,3 @@ Ya mandamos a imprimir el case oficial del proyecto
 ![Parte trasera de la botonera](../imagenes_proyecto/atras_botonera.jpeg)
 **(Parte trasera de la botonera)**
 
-## Nota
-
-En este enlace encontrarás un [ejemplo como debe completarse el informe de avance](avance_ejemplo.md).
