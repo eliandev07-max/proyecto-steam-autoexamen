@@ -1,5 +1,36 @@
 # Informe de Avance 2: Septiembre 2026
 
+## 2/9/2026
+
+### Problemas encontrados
+
+***1.0*** Problemas en la conección de redes.
+
+Surgen problemas en la conección entre el esp32 y el dispositio que va a recepcionar el resultado
+
+### Soluciones alternativas
+
+***1.0*** Enlace directo desde el esp32 al dispositivo
+
+Enlazamos directamente el esp32 mediante un punto hostpot al dispositivo que va a recibir las respuestas de los examenes, de ésta forma evitamos las restricciónes del wifi ceibal, el cual bloquea muchos puertos y protocoles en la red.
+
+### Avances 
+
+Nuevo programa monolito que gestiona (lcd 1602 + gestion del esp32 + de la recepción de las respuestas del examen) en [código completo v1.0 c++](../codigo%20de%20prueba/CodigoCompleto-Conexion.c++).
+
+### Tareas completadas
+  
+  Implementamos una vista tipo página web para el control del profesor:
+
+[Agregar nuevo alumno](../imagenes_proyecto/image%20(1).png)
+  *** (Agregar nuevo alumno) ***
+[Configuracion de la materia y examen](../imagenes_proyecto/image%20(2).png)
+  *** (Configuración de la materia y examen) ***
+[Control Examen](../imagenes_proyecto/image%20(3).png)
+  *** (Establece las respuestas correctas y espera el resultado del examen) ***
+[Agregar nuevo alumno](../imagenes_proyecto/image.png)
+  *** (Ver las notas globales de cada alumno en el examen) ***
+
 ## 9/9/2026
 
 No hubo clase
