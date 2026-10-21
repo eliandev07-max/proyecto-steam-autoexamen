@@ -36,8 +36,9 @@ Hoy implementamos la nueva botonera con su case y los botones andando:
 
 ### Desafíos encontrados
 
-* **1.0** Problemas con la implementación de la botonera, en el código (los cambles de los botones y los pines no tenían un orden), el botón de confirmar no funcionaba.  
+* **1.0** Problemas con la implementación de la botonera, en el código (los cambles de los botones y los pines no tenían un orden), el botón de confirmar no funcionaba.
 * **2.0** Problemas con la selección de alumnos antes de empezar el examen.
+
 ### Desafíos resueltos
 
 * **1.0** Acomodar los cables de la botonera para hacer match con los botónes.
@@ -55,6 +56,13 @@ Ya mandamos a imprimir el case oficial del proyecto
 ![Parte trasera de la botonera](../imagenes_proyecto/atras_botonera.jpeg)
 **(Parte trasera de la botonera)**
 
-## Nota
+## 14/10/2026
 
-En este enlace encontrarás un [ejemplo como debe completarse el informe de avance](avance_ejemplo.md).
+### Resumen
+Debido a la ausencia de los integrantes Nicolas Rodriguez y Agustin Silva, los integrantes Richard Rodriguez y Elian Gutierrez realizaron tareas de monitoreo a los proyectos de los grupos del resto de compañeros.
+
+## 21/10/2026
+Hoy miercoles 21 estamos todos los integrantes presentes con el objetivo de presentar el proyecto en el nuevo case
+
+![Foto case nuevo](../imagenes_proyecto/case_nuevo.jpg)
+
