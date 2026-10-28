@@ -1,4 +1,4 @@
-# Informe de Avance 3: Octubre 202x
+# Informe de Avance 3: Octubre 2026
 
 
 ## 14/10/2026
