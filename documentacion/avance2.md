@@ -58,13 +58,3 @@ https://github.com/user-attachments/assets/38a6b14d-ed94-43bb-9fa4-cd2f9a2c67c9
 ![Parte trasera de la botonera](../imagenes_proyecto/atras_botonera.jpeg)
 **(Parte trasera de la botonera)**
 
-## 14/10/2026
-
-### Resumen
-Debido a la ausencia de los integrantes Nicolas Rodriguez y Agustin Silva, los integrantes Richard Rodriguez y Elian Gutierrez realizaron tareas de monitoreo a los proyectos de los grupos del resto de compañeros.
-
-## 21/10/2026
-Hoy miercoles 21 estamos todos los integrantes presentes con el objetivo de presentar el proyecto en el nuevo case
-
-![Foto case nuevo](../imagenes_proyecto/case_nuevo.jpg)
-
