@@ -18,7 +18,7 @@ Este documento contiene la documentación técnica para el proyecto STEAM del cu
 
 ## 3. Materiales
 
-- `ESP-32 DEV KIT 1.0`, `botones`, `batería`, `carcasa`, `pantalla lcd 1202`, `cables`, `protoboard`.
+- `ESP-32 DEV KIT 1.0`, `botones`, `batería`, `carcasa`, `pantalla lcd 1602`, `cables`, `protoboard`.
 
 ## 4. Diseño Mecánico
 
@@ -76,12 +76,17 @@ Diagrama de esp en la protoboard con la botonera (diagrama fiel a la realidad)
 | botonera | esp32 |
 | :-------: | :---: |
 |   SUBIR   |  d25  |
-|   BAJAR   |  d27  |
+|   BAJAR   |  d26  |
 | CONFIRMAR |  d32  |
 | IZQUIERDA |  d26  |
 |  DERECHA  |  d13  |
 
 ---
+
+## Dispositivo terminado
+
+![dispositivo andando](../imagenes_proyecto/case_andando_enchufado.jpeg)
+Dispositivo terminado con carcasa
 
 ### Usuario de prueba del lógin del profesor
 

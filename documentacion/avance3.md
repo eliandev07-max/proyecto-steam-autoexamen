@@ -18,6 +18,9 @@ Hoy con todos los integrantes reunidos realizamos la integración del case, la s
 La batería integrada en el case no da el suficiente voltaje al **esp** para correr el programa.
 Al soldar directamente los cables al esp32
 
+## Solición
+Conectamos a un cargdor de 5v para alimentar al esp32 y la pantalla lcd 16x2 cómo último recurso.
+
 
 ## 04/11/2026
 
